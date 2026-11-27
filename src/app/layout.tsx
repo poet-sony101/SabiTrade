@@ -11,10 +11,12 @@ export const metadata: Metadata = {
   applicationName: 'SabiTrade',
   icons: {
     icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico' },
+      { url: '/icon.svg?v=2026', type: 'image/svg+xml' },
+      { url: '/favicon.ico?v=2026', sizes: 'any' },
     ],
-    apple: '/icon.svg',
+    apple: [
+      { url: '/apple-touch-icon.png?v=2026', sizes: '180x180', type: 'image/png' },
+    ],
   },
 };
 
@@ -33,7 +35,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/icon.svg?v=2026" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="/favicon.ico?v=2026" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2026" />
+        <meta name="apple-mobile-web-app-title" content="SabiTrade" />
       </head>
       <body className="min-h-screen bg-[var(--color-paper)] text-[var(--color-ink)] antialiased">
         <ConnectivityBanner />

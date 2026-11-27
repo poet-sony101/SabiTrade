@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="sabiFlame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B00"/>
+      <stop offset="100%" stop-color="#E03A00"/>
+    </linearGradient>
+    <linearGradient id="glyphGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFF2E8"/>
+    </linearGradient>
+  </defs>
+  <!-- Squircle Base -->
+  <rect width="512" height="512" rx="128" fill="url(#sabiFlame)"/>
+  
+  <!-- Subtle inner bevel ring -->
+  <rect x="8" y="8" width="496" height="496" rx="120" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="8"/>
+
+  <!-- Geometric Interlocking "S" Craft Mark -->
+  <!-- Upper loop -->
+  <path d="M365 185 C365 140, 320 125, 256 125 C185 125, 145 165, 145 220 C145 290, 367 270, 367 345 C367 405, 320 425, 256 425 C180 425, 145 385, 145 335" 
+        stroke="url(#glyphGrad)" 
+        stroke-width="50" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        fill="none"/>
+
+  <!-- Dynamic Solar / Trade Spark -->
+  <circle cx="365" cy="185" r="14" fill="#FFE500"/>
+  <circle cx="145" cy="335" r="14" fill="#FFE500"/>
+  
+  <!-- Central energy pulse -->
+  <path d="M256 225 L266 256 L256 287 L246 256 Z" fill="#FFE500" opacity="0.9"/>
+</svg>
