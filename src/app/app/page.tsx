@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { TRADE_TRACKS } from '@/data/trades';
 import { getBadges } from '@/data/badges';
 import TradeIcon from '@/components/TradeIcon';
+import SabiLogo from '@/components/SabiLogo';
 import { BadgeRecord } from '@/types';
 import { Clock, Award, ArrowRight, ShieldCheck, CheckCircle2, BookOpen } from 'lucide-react';
 
@@ -20,11 +21,11 @@ export default function LearningAppDashboard() {
       {/* Header */}
       <div className="flex flex-col justify-between gap-4 border-b border-[var(--color-hairline)] pb-8 md:flex-row md:items-center">
         <div>
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent-soft)] px-3 py-1 text-xs font-bold text-[var(--color-accent)]">
-            <BookOpen className="size-3.5" />
-            <span>Learner Workshop</span>
+          <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-surface)] px-3.5 py-1.5 text-xs font-bold text-[var(--color-ink)] shadow-sm ring-1 ring-[var(--color-hairline)]">
+            <SabiLogo className="size-4" />
+            <span>SabiTrade Learner Workshop</span>
           </div>
-          <h1 className="mt-2 font-display text-3xl font-extrabold text-[var(--color-ink)] md:text-4xl">
+          <h1 className="mt-3 font-display text-3xl font-extrabold text-[var(--color-ink)] md:text-4xl">
             Choose Your Trade Track
           </h1>
           <p className="mt-1 text-sm text-[var(--color-muted)]">
@@ -123,7 +124,7 @@ export default function LearningAppDashboard() {
 
                 <Link
                   href={`/app/tracks/${track.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)] px-5 py-2 text-xs font-bold text-[var(--color-on-accent)] transition-transform hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)] px-5 py-2 text-xs font-bold text-[var(--color-on-accent)] transition-all hover:bg-[var(--color-accent-press)] hover:scale-105 active:scale-95"
                 >
                   <span>{hasBadge ? 'Review Lessons' : 'Start Track'}</span>
                   <ArrowRight className="size-3.5" />

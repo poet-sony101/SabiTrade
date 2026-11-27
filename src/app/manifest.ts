@@ -8,13 +8,13 @@ export default function manifest(): MetadataRoute.Manifest {
       'Short practical lessons in English and Pidgin that work offline, a skill check that earns a verifiable badge, and local gigs you can apply for on WhatsApp.',
     start_url: '/',
     display: 'standalone',
-    background_color: '#f7f2ea',
-    theme_color: '#ad3c18',
+    background_color: '#faf7f2',
+    theme_color: '#ff5500',
     icons: [
       {
-        src: '/favicon.ico',
+        src: '/icon.svg',
         sizes: 'any',
-        type: 'image/x-icon',
+        type: 'image/svg+xml',
       },
     ],
   };

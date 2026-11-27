@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { getBadges, findBadgeById } from '@/data/badges';
+import { getBadges } from '@/data/badges';
 import { BadgeRecord } from '@/types';
 import Link from 'next/link';
+import SabiLogo from '@/components/SabiLogo';
 import {
   ShieldCheck,
   Search,
@@ -58,11 +59,11 @@ function VerifyContent() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 md:py-14">
-      {/* Page Header */}
+      {/* Page Header with SabiLogo */}
       <div className="text-center">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent-soft)] px-3.5 py-1 text-xs font-bold text-[var(--color-accent)]">
-          <ShieldCheck className="size-4" />
-          <span>Public Credential Registry</span>
+        <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-surface)] px-4 py-1.5 text-xs font-bold text-[var(--color-ink)] shadow-md ring-1 ring-[var(--color-hairline)]">
+          <SabiLogo className="size-4" />
+          <span>SabiTrade Public Credential Registry</span>
         </div>
         <h1 className="mt-3 font-display text-3xl font-extrabold text-[var(--color-ink)] md:text-5xl">
           Check a SabiTrade Badge
@@ -85,7 +86,7 @@ function VerifyContent() {
           </div>
           <button
             type="submit"
-            className="rounded-full bg-[var(--color-accent)] px-6 py-3 text-xs font-bold text-[var(--color-on-accent)] shadow-md transition-transform hover:scale-105 active:scale-95 md:text-sm"
+            className="rounded-full bg-[var(--color-accent)] px-6 py-3 text-xs font-bold text-[var(--color-on-accent)] shadow-md transition-transform hover:scale-105 active:scale-95 md:text-sm hover:bg-[var(--color-accent-press)]"
           >
             Verify Badge
           </button>
@@ -97,24 +98,22 @@ function VerifyContent() {
         <div className="mt-12 overflow-hidden rounded-3xl bg-[var(--color-surface)] p-6 shadow-2xl ring-2 ring-[var(--color-accent)] md:p-10">
           {/* Certificate Header Banner */}
           <div className="flex flex-col justify-between gap-4 border-b border-[var(--color-hairline)] pb-6 sm:flex-row sm:items-center">
-            <div className="flex items-center gap-3">
-              <span className="flex size-12 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-white shadow-md">
-                <FileCheck className="size-6" />
-              </span>
+            <div className="flex items-center gap-3.5">
+              <SabiLogo className="size-14" />
               <div>
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--color-accent)]">
                   {currentBadge.id}
                 </span>
                 <h2 className="font-display text-xl font-extrabold text-[var(--color-ink)] md:text-2xl">
-                  Official Competence Certificate
+                  SabiTrade Certified Competence
                 </h2>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-success-soft)] px-3.5 py-1.5 text-xs font-bold text-[var(--color-success)]">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-success-soft)] px-3.5 py-1.5 text-xs font-bold text-[var(--color-success)] ring-1 ring-[var(--color-success)]/30">
                 <CheckCircle2 className="size-4" />
-                <span>VERIFIED & ACTIVE</span>
+                <span>OFFICIALLY VERIFIED</span>
               </span>
             </div>
           </div>
@@ -123,7 +122,7 @@ function VerifyContent() {
           <div className="mt-8 grid gap-8 md:grid-cols-12">
             <div className="md:col-span-8">
               <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-muted)]">
-                Issued To:
+                Artisan Name:
               </p>
               <h3 className="font-display text-2xl font-extrabold text-[var(--color-ink)] md:text-3xl">
                 {currentBadge.learnerName}
@@ -163,7 +162,7 @@ function VerifyContent() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Award className="size-4 text-[var(--color-accent)]" />
-                  <span>Practical Examination Score: 100%</span>
+                  <span>Practical Scenario Examination: 100%</span>
                 </div>
                 <div>
                   <span>Registry: {currentBadge.verifiedBy}</span>
@@ -182,7 +181,7 @@ function VerifyContent() {
               <button
                 type="button"
                 onClick={handleShare}
-                className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[var(--color-ink)] px-4 py-2 text-xs font-bold text-[var(--color-paper)] transition-transform hover:scale-105 active:scale-95"
+                className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[var(--color-ink)] px-4 py-2 text-xs font-bold text-[var(--color-paper)] transition-transform hover:scale-105 active:scale-95 hover:bg-[var(--color-accent)]"
               >
                 <Share2 className="size-3.5" />
                 <span>{copied ? 'Link Copied!' : 'Copy Verification Link'}</span>

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import LanguageToggle from '@/components/LanguageToggle';
+import SabiLogo from '@/components/SabiLogo';
 import { CheckCircle2, Award, ArrowRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
@@ -33,12 +34,12 @@ export default function HeroPreview() {
 
   return (
     <div className="relative mx-auto mt-10 max-w-xl rounded-3xl bg-[var(--color-surface)] p-6 shadow-2xl ring-1 ring-[var(--color-hairline)] md:p-8">
-      {/* Decorative top bar */}
+      {/* Decorative top bar with SabiLogo */}
       <div className="flex items-center justify-between border-b border-[var(--color-hairline)] pb-4">
-        <div className="flex items-center gap-2">
-          <span className="size-3 rounded-full bg-[var(--color-accent)]/80" />
-          <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-muted)]">
-            Live Interactive Lesson Demo
+        <div className="flex items-center gap-2.5">
+          <SabiLogo className="size-6" />
+          <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-ink)]">
+            Sabi<span className="text-[var(--color-accent)]">Trade</span> Interactive Preview
           </span>
         </div>
         <LanguageToggle language={lang} onChange={setLang} />

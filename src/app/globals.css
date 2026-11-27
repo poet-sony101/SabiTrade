@@ -1,43 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --color-paper: #f7f2ea;
-  --color-surface: #fffdfa;
-  --color-shell: #ede4d4;
-  --color-ink: #1d1814;
-  --color-muted: #6b5c50;
-  --color-hairline: #ddd0be;
-  --color-accent: #ad3c18;
-  --color-accent-press: #8e3012;
-  --color-accent-soft: #f4e1d5;
-  --color-on-accent: #fff7ef;
-  --color-success: #286337;
-  --color-success-soft: #e1eedf;
-  --color-danger: #9e251c;
-  --color-danger-soft: #f8dedc;
-  --color-warn: #7c5300;
-  --color-warn-soft: #f6e9c9;
-  --shadow-float: 0 10px 30px -10px rgba(29, 24, 20, 0.08), 0 4px 6px -2px rgba(29, 24, 20, 0.03);
+  /* DOPE THEME COLORS: Radiant Electric Flame & Warm Porcelain */
+  --color-paper: #faf7f2;
+  --color-surface: #ffffff;
+  --color-shell: #f1ebd8;
+  --color-ink: #110e0c;
+  --color-muted: #66584c;
+  --color-hairline: #e3d9cc;
+  
+  /* Primary Dope Accent: Electric Flame Orange */
+  --color-accent: #ff5500;
+  --color-accent-press: #d94200;
+  --color-accent-soft: #fff1e8;
+  --color-on-accent: #ffffff;
+  
+  /* Secondary Accents */
+  --color-gold: #f59e0b;
+  --color-gold-soft: #fef3c7;
+  --color-success: #10b981;
+  --color-success-soft: #ecfdf5;
+  --color-danger: #ef4444;
+  --color-danger-soft: #fef2f2;
+  --color-warn: #f59e0b;
+  --color-warn-soft: #fffbeb;
+  
+  --shadow-float: 0 12px 36px -10px rgba(255, 85, 0, 0.12), 0 4px 12px -2px rgba(17, 14, 12, 0.05);
 }
 
 [data-theme="dark"] {
-  --color-paper: #16120e;
-  --color-surface: #1f1914;
-  --color-shell: #2a221b;
-  --color-ink: #f4ede4;
-  --color-muted: #b3a393;
-  --color-hairline: #423528;
-  --color-accent: #e66a3d;
-  --color-accent-press: #f07e53;
-  --color-accent-soft: #381e14;
-  --color-on-accent: #16120e;
-  --color-success: #61bf74;
-  --color-success-soft: #18331d;
-  --color-danger: #f17268;
-  --color-danger-soft: #3b1c1a;
-  --color-warn: #e3b341;
-  --color-warn-soft: #382c12;
-  --shadow-float: 0 10px 30px -10px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  /* DOPE DARK THEME: Deep Obsidian Velour & Neon Flame */
+  --color-paper: #0b0907;
+  --color-surface: #14110e;
+  --color-shell: #1f1b16;
+  --color-ink: #faf5ed;
+  --color-muted: #a89a8c;
+  --color-hairline: #29231c;
+  
+  /* Glowing Electric Flame */
+  --color-accent: #ff5c1c;
+  --color-accent-press: #ff753b;
+  --color-accent-soft: #2e1408;
+  --color-on-accent: #0b0907;
+  
+  /* Secondary Dark */
+  --color-gold: #fbbf24;
+  --color-gold-soft: #2e2107;
+  --color-success: #34d399;
+  --color-success-soft: #064e3b;
+  --color-danger: #f87171;
+  --color-danger-soft: #450a0a;
+  --color-warn: #fbbf24;
+  --color-warn-soft: #2e2107;
+  
+  --shadow-float: 0 16px 40px -10px rgba(255, 92, 28, 0.2), 0 4px 16px -2px rgba(0, 0, 0, 0.6);
 }
 
 body {
@@ -65,5 +81,5 @@ body {
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted);
+  background: var(--color-accent);
 }

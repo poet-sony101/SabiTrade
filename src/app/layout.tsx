@@ -5,17 +5,21 @@ import Footer from '@/components/Footer';
 import ConnectivityBanner from '@/components/ConnectivityBanner';
 
 export const metadata: Metadata = {
-  title: 'SabiTrade: learn a trade, get verified, find local gigs',
+  title: 'SabiTrade — Learn a trade, get verified, find local gigs',
   description:
     'Short practical lessons in English and Pidgin that work offline, a skill check that earns a verifiable badge, and local gigs you can apply for on WhatsApp.',
   applicationName: 'SabiTrade',
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico' },
+    ],
+    apple: '/icon.svg',
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#f7f2ea',
+  themeColor: '#ff5500',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -28,6 +32,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+      </head>
       <body className="min-h-screen bg-[var(--color-paper)] text-[var(--color-ink)] antialiased">
         <ConnectivityBanner />
         <Navbar />

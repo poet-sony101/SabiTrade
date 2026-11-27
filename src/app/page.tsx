@@ -4,6 +4,7 @@ import { TRADE_TRACKS } from '@/data/trades';
 import { GIGS } from '@/data/gigs';
 import TradeIcon from '@/components/TradeIcon';
 import HeroPreview from '@/components/HeroPreview';
+import SabiLogo from '@/components/SabiLogo';
 import {
   ArrowRight,
   WifiOff,
@@ -12,9 +13,7 @@ import {
   Clock,
   Sparkles,
   CheckCircle,
-  ChevronDown,
-  Building2,
-  Users
+  ChevronDown
 } from 'lucide-react';
 
 export default function HomePage() {
@@ -23,10 +22,12 @@ export default function HomePage() {
       {/* 1. HERO SECTION */}
       <section className="relative px-4 pt-6 pb-20 md:pt-12 md:pb-32">
         <div className="mx-auto max-w-4xl text-center">
-          {/* Badge pill */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-shell)] px-4 py-1.5 text-xs font-semibold text-[var(--color-ink)] ring-1 ring-[var(--color-hairline)]">
-            <span className="flex size-2 rounded-full bg-[var(--color-accent)] animate-ping" />
-            <span>New: Solar Inverter & Phone Diagnostics 2026 Cohorts</span>
+          {/* Title Logo Badge pill */}
+          <div className="inline-flex items-center gap-2.5 rounded-full bg-[var(--color-surface)] px-4 py-1.5 text-xs font-semibold text-[var(--color-ink)] shadow-md ring-1 ring-[var(--color-hairline)] hover:ring-[var(--color-accent)] transition-all">
+            <SabiLogo className="size-5" />
+            <span className="font-display font-bold">Sabi<span className="text-[var(--color-accent)]">Trade</span></span>
+            <span className="text-[var(--color-muted)]">•</span>
+            <span className="text-[var(--color-accent)] font-bold">2026 Vocational Cohorts</span>
           </div>
 
           {/* Headline with artisanal hand-drawn underline */}
@@ -63,7 +64,7 @@ export default function HomePage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/app"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-bold text-[var(--color-on-accent)] shadow-lg transition-transform hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-7 py-3.5 text-sm font-bold text-[var(--color-on-accent)] shadow-lg shadow-[var(--color-accent)]/20 transition-all hover:scale-105 hover:bg-[var(--color-accent-press)] active:scale-95"
             >
               <span>Start learning, it&apos;s free</span>
               <ArrowRight className="size-4" />
@@ -76,7 +77,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/verify"
-              className="inline-flex items-center gap-1.5 rounded-full px-4 py-3.5 text-sm font-medium text-[var(--color-muted)] hover:text-[var(--color-ink)]"
+              className="inline-flex items-center gap-1.5 rounded-full px-4 py-3.5 text-sm font-medium text-[var(--color-muted)] hover:text-[var(--color-accent)]"
             >
               <ShieldCheck className="size-4 text-[var(--color-accent)]" />
               <span>Check a badge</span>
@@ -137,7 +138,7 @@ export default function HomePage() {
             </div>
 
             <div className="rounded-2xl bg-[var(--color-paper)] p-6 ring-1 ring-[var(--color-hairline)]">
-              <div className="flex size-10 items-center justify-center rounded-full bg-[var(--color-success-soft)] text-[var(--color-success)]">
+              <div className="flex size-10 items-center justify-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
                 <span className="font-bold text-xs">🇳🇬</span>
               </div>
               <h3 className="mt-4 font-display text-base font-bold text-[var(--color-ink)]">
@@ -161,7 +162,7 @@ export default function HomePage() {
             </div>
 
             <div className="rounded-2xl bg-[var(--color-paper)] p-6 ring-1 ring-[var(--color-hairline)]">
-              <div className="flex size-10 items-center justify-center rounded-full bg-[var(--color-success-soft)] text-[var(--color-success)]">
+              <div className="flex size-10 items-center justify-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
                 <MessageCircle className="size-5" />
               </div>
               <h3 className="mt-4 font-display text-base font-bold text-[var(--color-ink)]">
@@ -312,7 +313,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-success)]">
+              <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-accent)]">
                 Local Opportunity Board
               </span>
               <h2 className="mt-1 font-display text-3xl font-bold text-[var(--color-ink)] sm:text-4xl">
@@ -342,7 +343,7 @@ export default function HomePage() {
                     <span className="rounded-full bg-[var(--color-accent-soft)] px-2.5 py-0.5 text-[11px] font-bold text-[var(--color-accent)]">
                       {gig.trade}
                     </span>
-                    <span className="text-xs font-semibold text-[var(--color-success)]">
+                    <span className="text-xs font-bold text-[var(--color-success)]">
                       {gig.pay}
                     </span>
                   </div>
@@ -423,7 +424,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/app"
-                className="mt-8 block w-full rounded-full bg-[var(--color-ink)] py-3 text-center text-xs font-bold text-[var(--color-paper)]"
+                className="mt-8 block w-full rounded-full bg-[var(--color-ink)] py-3 text-center text-xs font-bold text-[var(--color-paper)] hover:bg-[var(--color-accent)] transition-colors"
               >
                 Start Learning Now
               </Link>
@@ -462,7 +463,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/sponsors"
-                className="mt-8 block w-full rounded-full bg-[var(--color-accent)] py-3 text-center text-xs font-bold text-[var(--color-on-accent)]"
+                className="mt-8 block w-full rounded-full bg-[var(--color-accent)] py-3 text-center text-xs font-bold text-[var(--color-on-accent)] shadow-md hover:bg-[var(--color-accent-press)] transition-colors"
               >
                 Sponsor a Cohort
               </Link>
@@ -572,10 +573,10 @@ export default function HomePage() {
       {/* 8. FINAL CALL TO ACTION */}
       <section className="border-t border-[var(--color-hairline)] bg-[var(--color-surface)] py-20 px-4 text-center">
         <div className="mx-auto max-w-3xl">
-          <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-accent)]">
-            Take Action Today
-          </span>
-          <h2 className="mt-2 font-display text-3xl font-extrabold text-[var(--color-ink)] sm:text-5xl">
+          <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-[var(--color-accent)] text-white shadow-xl">
+            <SabiLogo className="size-10" />
+          </div>
+          <h2 className="mt-4 font-display text-3xl font-extrabold text-[var(--color-ink)] sm:text-5xl">
             Your first lesson takes three minutes.
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-sm text-[var(--color-muted)]">
@@ -584,7 +585,7 @@ export default function HomePage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/app"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-8 py-4 text-sm font-bold text-[var(--color-on-accent)] shadow-xl transition-transform hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-8 py-4 text-sm font-bold text-[var(--color-on-accent)] shadow-xl shadow-[var(--color-accent)]/25 transition-transform hover:scale-105 active:scale-95"
             >
               <span>Start Your First Lesson</span>
               <ArrowRight className="size-4" />

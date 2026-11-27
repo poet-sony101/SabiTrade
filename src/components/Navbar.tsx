@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Moon, Sun, ShieldCheck, Menu, X, ArrowRight } from 'lucide-react';
+import { Moon, Sun, Menu, X, ArrowRight } from 'lucide-react';
+import SabiLogo from '@/components/SabiLogo';
 
 export default function Navbar() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -31,20 +32,17 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-40 px-4 pt-3 md:pt-5">
       <nav
         aria-label="Main"
-        className="mx-auto flex w-full max-w-5xl items-center justify-between rounded-full bg-[var(--color-surface)]/95 py-2 pl-4 pr-2 shadow-[var(--shadow-float)] backdrop-blur-md ring-1 ring-[var(--color-hairline)]"
+        className="mx-auto flex w-full max-w-5xl items-center justify-between rounded-full bg-[var(--color-surface)]/95 py-2 pl-3.5 pr-2.5 shadow-[var(--shadow-float)] backdrop-blur-md ring-1 ring-[var(--color-hairline)]"
       >
-        {/* Brand */}
+        {/* Title Logo */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 rounded-full font-display text-lg font-bold tracking-tight text-[var(--color-ink)] transition-opacity hover:opacity-90"
+          className="inline-flex items-center gap-2.5 rounded-full transition-opacity hover:opacity-90"
         >
-          <span
-            aria-hidden="true"
-            className="flex size-7 items-center justify-center rounded-full bg-[var(--color-accent)] font-display text-sm font-bold text-[var(--color-on-accent)] shadow-sm"
-          >
-            S
+          <SabiLogo className="size-8" />
+          <span className="font-display text-xl font-extrabold tracking-tight text-[var(--color-ink)]">
+            Sabi<span className="text-[var(--color-accent)]">Trade</span>
           </span>
-          <span>SabiTrade</span>
         </Link>
 
         {/* Desktop Links */}
@@ -52,7 +50,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/#tracks"
-              className="rounded-full px-3.5 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+              className="rounded-full px-3.5 py-1.5 text-xs font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-shell)]"
             >
               Trades
             </Link>
@@ -60,7 +58,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/#how"
-              className="rounded-full px-3.5 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+              className="rounded-full px-3.5 py-1.5 text-xs font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-shell)]"
             >
               How It Works
             </Link>
@@ -68,7 +66,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/gigs"
-              className="rounded-full px-3.5 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+              className="rounded-full px-3.5 py-1.5 text-xs font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-shell)]"
             >
               Local Gigs
             </Link>
@@ -76,7 +74,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/verify"
-              className="rounded-full px-3.5 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+              className="rounded-full px-3.5 py-1.5 text-xs font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-shell)]"
             >
               Verify Badge
             </Link>
@@ -84,7 +82,7 @@ export default function Navbar() {
           <li>
             <Link
               href="/sponsors"
-              className="rounded-full px-3.5 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)]"
+              className="rounded-full px-3.5 py-1.5 text-xs font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-ink)] hover:bg-[var(--color-shell)]"
             >
               Sponsors
             </Link>
@@ -100,13 +98,13 @@ export default function Navbar() {
             aria-label="Toggle theme"
             className="inline-flex size-9 items-center justify-center rounded-full bg-[var(--color-shell)] text-[var(--color-ink)] ring-1 ring-[var(--color-hairline)] transition-transform hover:scale-105 active:scale-95"
           >
-            {theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}
+            {theme === 'dark' ? <Sun className="size-4 text-[var(--color-accent)]" /> : <Moon className="size-4 text-[var(--color-ink)]" />}
           </button>
 
           {/* Primary CTA */}
           <Link
             href="/app"
-            className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-ink)] px-4 py-2 text-xs font-semibold text-[var(--color-paper)] transition-all hover:bg-[var(--color-accent)] active:scale-95"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)] px-4 py-2 text-xs font-bold text-[var(--color-on-accent)] shadow-md transition-all hover:bg-[var(--color-accent-press)] hover:shadow-lg active:scale-95"
           >
             <span>Start Learning</span>
             <ArrowRight className="size-3.5" />

@@ -6,6 +6,7 @@ import { notFound, useRouter } from 'next/navigation';
 import { TRADE_TRACKS } from '@/data/trades';
 import { saveBadge, getBadges } from '@/data/badges';
 import TradeIcon from '@/components/TradeIcon';
+import SabiLogo from '@/components/SabiLogo';
 import LanguageToggle from '@/components/LanguageToggle';
 import { BadgeRecord } from '@/types';
 import confetti from 'canvas-confetti';
@@ -324,7 +325,7 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
                 <button
                   type="button"
                   onClick={handleNextLesson}
-                  className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-xs font-bold text-[var(--color-on-accent)] shadow-md transition-transform hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-3 text-xs font-bold text-[var(--color-on-accent)] shadow-md transition-transform hover:scale-105 active:scale-95 hover:bg-[var(--color-accent-press)]"
                 >
                   <span>{isLastLesson ? 'Proceed to Skill Check' : 'Next Lesson'}</span>
                   <ArrowRight className="size-4" />
@@ -356,7 +357,6 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
               <div className="mt-8 space-y-8">
                 {track.quiz.map((q, qIdx) => {
                   const userAnswer = selectedAnswers[q.id];
-                  const hasAnswered = userAnswer !== undefined;
                   const isCorrect = userAnswer === q.correctIndex;
 
                   return (
@@ -438,7 +438,7 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
                       type="button"
                       onClick={handleSubmitQuiz}
                       disabled={Object.keys(selectedAnswers).length < track.quiz.length}
-                      className="rounded-full bg-[var(--color-accent)] px-8 py-3 text-xs font-bold text-[var(--color-on-accent)] shadow-md transition-transform hover:scale-105 active:scale-95 disabled:opacity-40"
+                      className="rounded-full bg-[var(--color-accent)] px-8 py-3 text-xs font-bold text-[var(--color-on-accent)] shadow-md transition-transform hover:scale-105 active:scale-95 disabled:opacity-40 hover:bg-[var(--color-accent-press)]"
                     >
                       Submit Skill Check
                     </button>
@@ -446,9 +446,9 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
                 ) : (
                   <div>
                     {quizScore === track.quiz.length ? (
-                      /* 100% SCORE CLAIM BADGE FORM */
+                      /* 100% SCORE CLAIM BADGE FORM WITH LOGO */
                       <div className="rounded-3xl bg-[var(--color-success-soft)] p-6 ring-1 ring-[var(--color-success)]/40 text-center">
-                        <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-[var(--color-success)] text-white shadow-lg">
+                        <div className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-[var(--color-success)] text-white shadow-lg">
                           <CheckCircle2 className="size-8" />
                         </div>
                         <h3 className="mt-4 font-display text-2xl font-extrabold text-[var(--color-success)]">
@@ -473,31 +473,34 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
                             />
                             <button
                               type="submit"
-                              className="mt-4 w-full rounded-full bg-[var(--color-accent)] py-3 text-xs font-bold text-[var(--color-on-accent)] shadow-md hover:scale-105 transition-transform"
+                              className="mt-4 w-full rounded-full bg-[var(--color-accent)] py-3 text-xs font-bold text-[var(--color-on-accent)] shadow-md hover:scale-105 transition-transform hover:bg-[var(--color-accent-press)]"
                             >
                               Mint Verified Digital Badge
                             </button>
                           </form>
                         ) : (
-                          <div className="mt-6 rounded-2xl bg-[var(--color-surface)] p-5 text-left ring-1 ring-[var(--color-hairline)]">
-                            <div className="flex items-center justify-between">
-                              <span className="font-mono text-xs font-bold text-[var(--color-accent)]">
-                                {earnedBadge.id}
-                              </span>
-                              <span className="rounded-full bg-[var(--color-success-soft)] px-2 py-0.5 text-[10px] font-bold text-[var(--color-success)]">
-                                VERIFIED
+                          <div className="mt-6 rounded-2xl bg-[var(--color-surface)] p-5 text-left ring-1 ring-[var(--color-hairline)] shadow-lg">
+                            <div className="flex items-center justify-between border-b border-[var(--color-hairline)] pb-3">
+                              <div className="flex items-center gap-2">
+                                <SabiLogo className="size-6" />
+                                <span className="font-mono text-xs font-bold text-[var(--color-accent)]">
+                                  {earnedBadge.id}
+                                </span>
+                              </div>
+                              <span className="rounded-full bg-[var(--color-success-soft)] px-2.5 py-0.5 text-[10px] font-bold text-[var(--color-success)] ring-1 ring-[var(--color-success)]/30">
+                                OFFICIALLY VERIFIED
                               </span>
                             </div>
-                            <h4 className="mt-2 text-base font-bold text-[var(--color-ink)]">
+                            <h4 className="mt-3 text-base font-bold text-[var(--color-ink)]">
                               {earnedBadge.trackTitle}
                             </h4>
                             <p className="text-xs text-[var(--color-muted)]">
                               Issued to: {earnedBadge.learnerName}
                             </p>
-                            <div className="mt-4 flex gap-2">
+                            <div className="mt-5 flex gap-2">
                               <Link
                                 href={`/verify?id=${earnedBadge.id}`}
-                                className="flex-1 rounded-full bg-[var(--color-accent)] py-2 text-center text-xs font-bold text-[var(--color-on-accent)]"
+                                className="flex-1 rounded-full bg-[var(--color-accent)] py-2 text-center text-xs font-bold text-[var(--color-on-accent)] hover:bg-[var(--color-accent-press)]"
                               >
                                 View Certificate & QR
                               </Link>
@@ -523,7 +526,7 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
                         <button
                           type="button"
                           onClick={resetQuiz}
-                          className="mt-4 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-2.5 text-xs font-bold text-[var(--color-on-accent)]"
+                          className="mt-4 inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] px-6 py-2.5 text-xs font-bold text-[var(--color-on-accent)] hover:bg-[var(--color-accent-press)]"
                         >
                           <RotateCcw className="size-3.5" />
                           <span>Retake Skill Check</span>
