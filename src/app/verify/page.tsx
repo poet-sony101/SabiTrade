@@ -16,6 +16,8 @@ import {
   ArrowRight,
   Sparkles,
   QrCode,
+  Printer,
+  Download,
   FileCheck
 } from 'lucide-react';
 
@@ -57,10 +59,16 @@ function VerifyContent() {
     setTimeout(() => setCopied(false), 3000);
   };
 
+  const handlePrint = () => {
+    if (typeof window !== 'undefined') {
+      window.print();
+    }
+  };
+
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 md:py-14">
-      {/* Page Header with SabiLogo */}
-      <div className="text-center">
+      {/* Page Header (Hidden on print) */}
+      <div className="no-print text-center">
         <div className="inline-flex items-center gap-2 rounded-full bg-[var(--color-surface)] px-4 py-1.5 text-xs font-bold text-[var(--color-ink)] shadow-md ring-1 ring-[var(--color-hairline)]">
           <SabiLogo className="size-4" />
           <span>SabiTrade Public Credential Registry</span>
@@ -93,99 +101,130 @@ function VerifyContent() {
         </form>
       </div>
 
-      {/* Verification Result Card */}
+      {/* Verification Result Certificate */}
       {currentBadge ? (
-        <div className="mt-12 overflow-hidden rounded-3xl bg-[var(--color-surface)] p-6 shadow-2xl ring-2 ring-[var(--color-accent)] md:p-10">
-          {/* Certificate Header Banner */}
-          <div className="flex flex-col justify-between gap-4 border-b border-[var(--color-hairline)] pb-6 sm:flex-row sm:items-center">
-            <div className="flex items-center gap-3.5">
-              <SabiLogo className="size-14" />
-              <div>
-                <span className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--color-accent)]">
-                  {currentBadge.id}
-                </span>
-                <h2 className="font-display text-xl font-extrabold text-[var(--color-ink)] md:text-2xl">
-                  SabiTrade Certified Competence
-                </h2>
-              </div>
+        <div className="mt-8">
+          {/* Action Toolbar (Hidden during print) */}
+          <div className="no-print mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[var(--color-surface)] p-4 ring-1 ring-[var(--color-hairline)]">
+            <div className="flex items-center gap-2 text-xs text-[var(--color-muted)]">
+              <ShieldCheck className="size-4 text-[var(--color-success)]" />
+              <span>Official Registry Record: <strong>{currentBadge.id}</strong></span>
             </div>
-
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-success-soft)] px-3.5 py-1.5 text-xs font-bold text-[var(--color-success)] ring-1 ring-[var(--color-success)]/30">
-                <CheckCircle2 className="size-4" />
-                <span>OFFICIALLY VERIFIED</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Certificate Body */}
-          <div className="mt-8 grid gap-8 md:grid-cols-12">
-            <div className="md:col-span-8">
-              <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-muted)]">
-                Artisan Name:
-              </p>
-              <h3 className="font-display text-2xl font-extrabold text-[var(--color-ink)] md:text-3xl">
-                {currentBadge.learnerName}
-              </h3>
-
-              <div className="mt-6">
-                <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-muted)]">
-                  Certified Trade Track:
-                </p>
-                <p className="mt-1 text-base font-bold text-[var(--color-accent)]">
-                  {currentBadge.trackTitle} ({currentBadge.badgeCode})
-                </p>
-              </div>
-
-              {/* Certified Competencies */}
-              <div className="mt-6">
-                <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-muted)]">
-                  Verified Technical Competencies:
-                </p>
-                <div className="mt-2.5 flex flex-wrap gap-2">
-                  {currentBadge.skills.map((s, idx) => (
-                    <span
-                      key={idx}
-                      className="rounded-full bg-[var(--color-paper)] px-3 py-1 text-xs font-medium text-[var(--color-ink)] ring-1 ring-[var(--color-hairline)]"
-                    >
-                      ✓ {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Metadata */}
-              <div className="mt-8 flex flex-wrap gap-6 border-t border-[var(--color-hairline)] pt-6 text-xs text-[var(--color-muted)]">
-                <div className="flex items-center gap-2">
-                  <Calendar className="size-4 text-[var(--color-accent)]" />
-                  <span>Issued: {currentBadge.issuedAt}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Award className="size-4 text-[var(--color-accent)]" />
-                  <span>Practical Scenario Examination: 100%</span>
-                </div>
-                <div>
-                  <span>Registry: {currentBadge.verifiedBy}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Simulated QR Code / Seal Box */}
-            <div className="flex flex-col items-center justify-center rounded-2xl bg-[var(--color-paper)] p-6 text-center ring-1 ring-[var(--color-hairline)] md:col-span-4">
-              <div className="flex size-32 items-center justify-center rounded-2xl bg-white p-3 shadow-inner ring-1 ring-stone-200">
-                <QrCode className="size-24 text-[var(--color-ink)]" />
-              </div>
-              <p className="mt-3 font-mono text-[10px] text-[var(--color-muted)]">
-                Scan to verify on public web
-              </p>
+              <button
+                type="button"
+                onClick={handlePrint}
+                className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)] px-4 py-2 text-xs font-bold text-[var(--color-on-accent)] shadow-md transition-transform hover:scale-105 active:scale-95 hover:bg-[var(--color-accent-press)]"
+              >
+                <Printer className="size-3.5" />
+                <span>Print / Save PDF Certificate</span>
+              </button>
               <button
                 type="button"
                 onClick={handleShare}
-                className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[var(--color-ink)] px-4 py-2 text-xs font-bold text-[var(--color-paper)] transition-transform hover:scale-105 active:scale-95 hover:bg-[var(--color-accent)]"
+                className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-shell)] px-3.5 py-2 text-xs font-semibold text-[var(--color-ink)] hover:bg-[var(--color-hairline)]"
               >
                 <Share2 className="size-3.5" />
-                <span>{copied ? 'Link Copied!' : 'Copy Verification Link'}</span>
+                <span>{copied ? 'Copied!' : 'Share Link'}</span>
               </button>
+            </div>
+          </div>
+
+          {/* Printable Framed Official Certificate Card */}
+          <div
+            id="printable-certificate"
+            className="relative overflow-hidden rounded-3xl bg-[var(--color-surface)] p-8 shadow-2xl ring-2 ring-[var(--color-accent)] md:p-12"
+          >
+            {/* Elegant double-line certificate border */}
+            <div className="pointer-events-none absolute inset-3 rounded-2xl border-2 border-[var(--color-accent)]/20 md:inset-4 md:border-2" />
+            <div className="pointer-events-none absolute inset-4 rounded-xl border border-[var(--color-hairline)] md:inset-6" />
+
+            {/* Certificate Header Banner */}
+            <div className="relative text-center">
+              <div className="mx-auto flex size-16 items-center justify-center">
+                <SabiLogo className="size-16" />
+              </div>
+              <p className="mt-3 text-[10px] font-extrabold uppercase tracking-[0.25em] text-[var(--color-accent)]">
+                The SabiTrade Vocational & Informal Enterprise Registry
+              </p>
+              <h2 className="mt-1 font-display text-2xl font-black uppercase tracking-wider text-[var(--color-ink)] md:text-3xl">
+                Certificate of Trade Competence
+              </h2>
+              <div className="mx-auto mt-2 flex items-center justify-center gap-2">
+                <span className="h-px w-12 bg-[var(--color-accent)]" />
+                <span className="font-mono text-xs font-bold text-[var(--color-muted)]">
+                  CREDENTIAL ID: {currentBadge.id}
+                </span>
+                <span className="h-px w-12 bg-[var(--color-accent)]" />
+              </div>
+            </div>
+
+            {/* Certificate Awarded To Statement */}
+            <div className="relative mt-8 text-center">
+              <p className="text-xs uppercase tracking-widest text-[var(--color-muted)]">
+                This is to certify that
+              </p>
+              <h3 className="mt-2 font-display text-3xl font-black text-[var(--color-ink)] underline decoration-[var(--color-accent)] decoration-2 underline-offset-8 md:text-4xl">
+                {currentBadge.learnerName}
+              </h3>
+              <p className="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-[var(--color-muted)] md:text-sm">
+                has completed the standardized curriculum modules, demonstrated practical shop-readiness, and answered 100% of scenario troubleshooting checks in:
+              </p>
+              <p className="mt-2 font-display text-xl font-extrabold text-[var(--color-accent)] md:text-2xl">
+                {currentBadge.trackTitle}
+              </p>
+            </div>
+
+            {/* Certified Technical Competencies */}
+            <div className="relative mt-8 rounded-2xl bg-[var(--color-paper)] p-5 ring-1 ring-[var(--color-hairline)]">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-muted)]">
+                Verified Practical Competencies Mastered:
+              </p>
+              <div className="mt-2.5 flex flex-wrap gap-2">
+                {currentBadge.skills.map((s, idx) => (
+                  <span
+                    key={idx}
+                    className="rounded-full bg-[var(--color-surface)] px-3 py-1 text-xs font-semibold text-[var(--color-ink)] ring-1 ring-[var(--color-hairline)]"
+                  >
+                    ✓ {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Certificate Footer Signatures & QR Code */}
+            <div className="relative mt-10 grid grid-cols-1 items-end justify-between gap-6 border-t border-[var(--color-hairline)] pt-8 sm:grid-cols-3">
+              {/* Registrar Signature */}
+              <div className="text-left">
+                <div className="h-10 border-b border-dashed border-[var(--color-ink)]/40 flex items-end">
+                  <span className="font-display italic text-lg text-[var(--color-accent)]">Oluwaniyi A.</span>
+                </div>
+                <p className="mt-1 text-[11px] font-bold text-[var(--color-ink)]">Director of Vocational Standards</p>
+                <p className="text-[10px] text-[var(--color-muted)]">SabiTrade Education Registry</p>
+              </div>
+
+              {/* Central Official Seal */}
+              <div className="flex flex-col items-center justify-center text-center">
+                <div className="flex size-14 items-center justify-center rounded-full bg-[var(--color-accent-soft)] ring-2 ring-[var(--color-accent)]">
+                  <Award className="size-8 text-[var(--color-accent)]" />
+                </div>
+                <span className="mt-1 font-mono text-[9px] font-black uppercase tracking-wider text-[var(--color-accent)]">
+                  OFFICIAL VERIFIED SEAL
+                </span>
+                <span className="text-[10px] text-[var(--color-muted)]">
+                  Issued: {currentBadge.issuedAt}
+                </span>
+              </div>
+
+              {/* QR Verification Seal */}
+              <div className="flex flex-col items-end text-right">
+                <div className="flex size-16 items-center justify-center rounded-xl bg-white p-1 shadow-sm ring-1 ring-stone-300">
+                  <QrCode className="size-14 text-stone-900" />
+                </div>
+                <p className="mt-1 font-mono text-[9px] text-[var(--color-muted)]">
+                  Scan to verify online
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -202,8 +241,8 @@ function VerifyContent() {
         )
       )}
 
-      {/* Directory of Sample Badges to Click */}
-      <div className="mt-16">
+      {/* Directory of Sample Badges to Click (Hidden on Print) */}
+      <div className="no-print mt-16">
         <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--color-muted)]">
           Recent Registered Public Badges
         </h3>

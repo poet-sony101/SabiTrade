@@ -14,8 +14,10 @@ import {
   ArrowRight
 } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
 
 export default function GigsPage() {
+  const { user, openAuthModal } = useAuth();
   const [selectedTrade, setSelectedTrade] = useState<string>('all');
   const [showPostModal, setShowPostModal] = useState(false);
   const [submittedPost, setSubmittedPost] = useState(false);
@@ -84,7 +86,9 @@ export default function GigsPage() {
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         {filteredGigs.map((gig) => {
           const defaultBadgeId = `${gig.requiredBadge}-2026-7841`;
-          const whatsappText = `Hello ${gig.company}, I saw your opening for "${gig.title}" on SabiTrade. Here is my verified competence badge: https://sabitrade.vercel.app/verify?id=${defaultBadgeId}`;
+          const applicantName = user ? user.name : 'an artisan';
+          const applicantPhone = user ? ` (WhatsApp: ${user.phone})` : '';
+          const whatsappText = `Hello ${gig.company}, my name is ${applicantName}${applicantPhone}. I saw your vacancy for "${gig.title}" on SabiTrade. Here is my verified competence badge: https://sabitrade.vercel.app/verify?id=${defaultBadgeId}`;
           const waUrl = `https://wa.me/${gig.whatsapp.replace('+', '')}?text=${encodeURIComponent(whatsappText)}`;
 
           return (

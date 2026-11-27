@@ -8,8 +8,10 @@ import { saveBadge, getBadges } from '@/data/badges';
 import TradeIcon from '@/components/TradeIcon';
 import SabiLogo from '@/components/SabiLogo';
 import LanguageToggle from '@/components/LanguageToggle';
+import AudioLessonPlayer from '@/components/AudioLessonPlayer';
 import { BadgeRecord } from '@/types';
 import confetti from 'canvas-confetti';
+import { useAuth } from '@/context/AuthContext';
 import {
   ArrowLeft,
   ArrowRight,
@@ -19,8 +21,8 @@ import {
   Sparkles,
   ShieldCheck,
   RotateCcw,
-  BookOpen,
-  MessageCircle
+  Calculator,
+  BookOpen
 } from 'lucide-react';
 
 interface TrackPlayerClientProps {
@@ -43,7 +45,8 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [quizScore, setQuizScore] = useState(0);
-  const [learnerName, setLearnerName] = useState('');
+  const { user } = useAuth();
+  const [learnerName, setLearnerName] = useState(user ? user.name : '');
   const [earnedBadge, setEarnedBadge] = useState<BadgeRecord | null>(null);
 
   useEffect(() => {
@@ -52,8 +55,10 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
     if (existing) {
       setEarnedBadge(existing);
       setLearnerName(existing.learnerName);
+    } else if (user && !learnerName) {
+      setLearnerName(user.name);
     }
-  }, [slug]);
+  }, [slug, user]);
 
   const currentLesson = track.lessons[currentLessonIndex];
   const isLastLesson = currentLessonIndex === track.lessons.length - 1;
@@ -175,15 +180,27 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
           </div>
         </div>
 
-        {earnedBadge && (
-          <Link
-            href={`/verify?id=${earnedBadge.id}`}
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--color-success-soft)] px-4 py-2 text-xs font-bold text-[var(--color-success)] ring-1 ring-[var(--color-success)]/30 hover:scale-105 transition-transform"
-          >
-            <ShieldCheck className="size-4" />
-            <span>Badge: {earnedBadge.id}</span>
-          </Link>
-        )}
+        <div className="flex items-center gap-2">
+          {slug === 'work-ready-basics' && (
+            <Link
+              href="/quote"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-shell)] px-3.5 py-2 text-xs font-bold text-[var(--color-ink)] ring-1 ring-[var(--color-hairline)] hover:bg-[var(--color-hairline)]"
+            >
+              <Calculator className="size-3.5 text-[var(--color-accent)]" />
+              <span>Quote Tool</span>
+            </Link>
+          )}
+
+          {earnedBadge && (
+            <Link
+              href={`/verify?id=${earnedBadge.id}`}
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--color-success-soft)] px-4 py-2 text-xs font-bold text-[var(--color-success)] ring-1 ring-[var(--color-success)]/30 hover:scale-105 transition-transform"
+            >
+              <ShieldCheck className="size-4" />
+              <span>Badge: {earnedBadge.id}</span>
+            </Link>
+          )}
+        </div>
       </div>
 
       {/* Main Container: Sidebar + Content */}
@@ -284,9 +301,16 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
               </div>
 
               {/* Lesson Title */}
-              <h2 className="mt-6 font-display text-2xl font-extrabold text-[var(--color-ink)] md:text-3xl">
+              <h2 className="mt-5 font-display text-2xl font-extrabold text-[var(--color-ink)] md:text-3xl">
                 {language === 'en' ? currentLesson.title : currentLesson.titlePidgin}
               </h2>
+
+              {/* Hands-Free Audio Player */}
+              <AudioLessonPlayer
+                title={language === 'en' ? currentLesson.title : currentLesson.titlePidgin}
+                content={language === 'en' ? currentLesson.contentEn : currentLesson.contentPidgin}
+                language={language}
+              />
 
               {/* Lesson Body */}
               <div className="mt-6 space-y-4 text-sm leading-relaxed text-[var(--color-ink)] md:text-base">
@@ -298,6 +322,27 @@ export default function TrackPlayerClient({ slug }: TrackPlayerClientProps) {
                     </p>
                   ))}
               </div>
+
+              {/* Lesson 2 Contextual CTA to Quote Tool */}
+              {currentLesson.id === 'wrk-2' && (
+                <div className="mt-6 flex flex-col justify-between gap-3 rounded-2xl bg-[var(--color-accent-soft)] p-4 sm:flex-row sm:items-center">
+                  <div>
+                    <h4 className="text-xs font-bold text-[var(--color-accent)]">
+                      Put this lesson into practice:
+                    </h4>
+                    <p className="text-xs text-[var(--color-ink)]">
+                      Use our interactive Job Price Calculator to calculate your 10% contingency and send WhatsApp quotes to clients.
+                    </p>
+                  </div>
+                  <Link
+                    href="/quote"
+                    className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[var(--color-accent)] px-4 py-2 text-xs font-bold text-[var(--color-on-accent)] shadow-sm hover:scale-105 transition-transform"
+                  >
+                    <Calculator className="size-3.5" />
+                    <span>Launch Calculator</span>
+                  </Link>
+                </div>
+              )}
 
               {/* Key Takeaway box */}
               <div className="mt-8 rounded-2xl bg-[var(--color-shell)] p-5 ring-1 ring-[var(--color-hairline)]">

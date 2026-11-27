@@ -75,3 +75,34 @@ export interface CohortMetric {
   gigsApplied: number;
   completionRate: string;
 }
+
+export type UserRole = 'artisan' | 'vendor' | 'sponsor';
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  businessName?: string;
+  phone: string;
+  role: UserRole;
+  trade: string;
+  tradeSlug?: string;
+  location: string;
+  avatarSeed?: string;
+  badgesCount?: number;
+  verified: boolean;
+  createdAt: string;
+}
+
+export interface DiagnosticItem {
+  id: string;
+  symptom: string;
+  symptomPidgin: string;
+  tradeTitle: string;
+  tradeSlug: string;
+  lessonId: string;
+  lessonTitle: string;
+  quickFix: string;
+  quickFixPidgin: string;
+  severity: 'CRITICAL_SAFETY' | 'HIGH_FAULT' | 'COMMON_MAINTENANCE' | 'PRO_TIP';
+  keywords: string[];
+}

@@ -83,3 +83,41 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent);
 }
+
+/* Print Certificate Specific Styling */
+@media print {
+  @page {
+    size: landscape;
+    margin: 0.8cm;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #110e0c !important;
+    padding: 0 !important;
+  }
+
+  header,
+  footer,
+  aside,
+  nav,
+  .no-print,
+  [role="status"] {
+    display: none !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  #printable-certificate {
+    box-shadow: none !important;
+    border: 3px double #ff5500 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

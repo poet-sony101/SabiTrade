@@ -4,6 +4,7 @@ import { TRADE_TRACKS } from '@/data/trades';
 import { GIGS } from '@/data/gigs';
 import TradeIcon from '@/components/TradeIcon';
 import HeroPreview from '@/components/HeroPreview';
+import DiagnosticHeroSearch from '@/components/DiagnosticHeroSearch';
 import SabiLogo from '@/components/SabiLogo';
 import {
   ArrowRight,
@@ -83,6 +84,9 @@ export default function HomePage() {
               <span>Check a badge</span>
             </Link>
           </div>
+
+          {/* Quick Diagnostic Search Trigger */}
+          <DiagnosticHeroSearch />
 
           {/* Interactive Hero Demo preview */}
           <HeroPreview />

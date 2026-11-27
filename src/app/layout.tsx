@@ -3,6 +3,9 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ConnectivityBanner from '@/components/ConnectivityBanner';
+import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
+import InstallPrompt from '@/components/InstallPrompt';
+import ClientProviders from '@/components/ClientProviders';
 
 export const metadata: Metadata = {
   title: 'SabiTrade — Learn a trade, get verified, find local gigs',
@@ -41,10 +44,14 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="SabiTrade" />
       </head>
       <body className="min-h-screen bg-[var(--color-paper)] text-[var(--color-ink)] antialiased">
-        <ConnectivityBanner />
-        <Navbar />
-        <main className="pt-20 md:pt-24">{children}</main>
-        <Footer />
+        <ClientProviders>
+          <ServiceWorkerRegister />
+          <ConnectivityBanner />
+          <InstallPrompt />
+          <Navbar />
+          <main className="pt-20 md:pt-24">{children}</main>
+          <Footer />
+        </ClientProviders>
       </body>
     </html>
   );

@@ -7,9 +7,13 @@ import { getBadges } from '@/data/badges';
 import TradeIcon from '@/components/TradeIcon';
 import SabiLogo from '@/components/SabiLogo';
 import { BadgeRecord } from '@/types';
-import { Clock, Award, ArrowRight, ShieldCheck, CheckCircle2, BookOpen } from 'lucide-react';
+import { Clock, Award, ArrowRight, ShieldCheck, CheckCircle2, BookOpen, Search, Zap } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { useSearch } from '@/context/SearchContext';
 
 export default function LearningAppDashboard() {
+  const { user, isAuthenticated, openAuthModal } = useAuth();
+  const { openSearch } = useSearch();
   const [earnedBadges, setEarnedBadges] = useState<BadgeRecord[]>([]);
 
   useEffect(() => {
@@ -26,23 +30,51 @@ export default function LearningAppDashboard() {
             <span>SabiTrade Learner Workshop</span>
           </div>
           <h1 className="mt-3 font-display text-3xl font-extrabold text-[var(--color-ink)] md:text-4xl">
-            Choose Your Trade Track
+            {user ? `Welcome, ${user.name.split(' ')[0]}` : 'Choose Your Trade Track'}
           </h1>
           <p className="mt-1 text-sm text-[var(--color-muted)]">
-            Read practical 3-minute lessons in English or Pidgin, complete the skill check, and earn your verified badge.
+            {user ? (
+              <span>
+                Connected as <strong className="text-[var(--color-ink)]">{user.role.toUpperCase()}</strong> • 📍 {user.location}
+              </span>
+            ) : (
+              'Read practical 3-minute lessons in English or Pidgin, complete the skill check, and earn your verified badge.'
+            )}
           </p>
         </div>
 
-        {/* Quick status badge count */}
-        <div className="flex items-center gap-3 rounded-2xl bg-[var(--color-surface)] p-3 ring-1 ring-[var(--color-hairline)]">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
-            <Award className="size-5" />
-          </div>
-          <div>
-            <p className="text-xs text-[var(--color-muted)]">Your Badges</p>
-            <p className="text-sm font-bold text-[var(--color-ink)]">
-              {earnedBadges.length} Verified
-            </p>
+        {/* Action Controls: Search & Badges */}
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={openSearch}
+            className="flex items-center gap-2 rounded-2xl bg-[var(--color-surface)] p-3 ring-1 ring-[var(--color-hairline)] hover:ring-[var(--color-accent)] transition-all text-left shadow-sm"
+          >
+            <div className="flex size-10 items-center justify-center rounded-xl bg-[var(--color-accent)]/10 text-[var(--color-accent)]">
+              <Zap className="size-5" />
+            </div>
+            <div>
+              <p className="text-[11px] text-[var(--color-muted)] font-medium">Workshop Fixes</p>
+              <p className="text-xs font-bold text-[var(--color-ink)] flex items-center gap-1">
+                <span>Quick Diagnostic</span>
+                <kbd className="hidden sm:inline rounded bg-[var(--color-shell)] px-1.5 py-0.2 text-[9px] font-mono border border-[var(--color-hairline)]">
+                  Ctrl+K
+                </kbd>
+              </p>
+            </div>
+          </button>
+
+          {/* Quick status badge count */}
+          <div className="flex items-center gap-3 rounded-2xl bg-[var(--color-surface)] p-3 ring-1 ring-[var(--color-hairline)] shadow-sm">
+            <div className="flex size-10 items-center justify-center rounded-xl bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+              <Award className="size-5" />
+            </div>
+            <div>
+              <p className="text-xs text-[var(--color-muted)]">Your Badges</p>
+              <p className="text-sm font-bold text-[var(--color-ink)]">
+                {earnedBadges.length} Verified
+              </p>
+            </div>
           </div>
         </div>
       </div>

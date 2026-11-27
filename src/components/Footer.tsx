@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ShieldCheck, MessageCircle } from 'lucide-react';
+import { ShieldCheck, MessageCircle, Calculator } from 'lucide-react';
 import SabiLogo from '@/components/SabiLogo';
 
 export default function Footer() {
@@ -66,12 +66,18 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Trust & Verification */}
+          {/* Trust & Tools */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--color-ink)]">
-              Ecosystem
+              Tools & Ecosystem
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm text-[var(--color-muted)]">
+              <li>
+                <Link href="/quote" className="inline-flex items-center gap-1.5 font-bold text-[var(--color-accent)] hover:underline">
+                  <Calculator className="size-3.5" />
+                  <span>Job Quote Generator</span>
+                </Link>
+              </li>
               <li>
                 <Link href="/gigs" className="hover:text-[var(--color-accent)]">
                   Local Gig Board
@@ -106,6 +112,10 @@ export default function Footer() {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--color-hairline)] pt-8 text-xs text-[var(--color-muted)] md:flex-row">
           <p>© 2026 SabiTrade. Free vocational knowledge for everyday artisans.</p>
           <div className="flex items-center gap-4">
+            <Link href="/quote" className="hover:underline text-[var(--color-accent)]">
+              Quote Tool
+            </Link>
+            <span>•</span>
             <Link href="/verify" className="hover:underline">
               Registry
             </Link>
@@ -113,8 +123,6 @@ export default function Footer() {
             <Link href="/#faq" className="hover:underline">
               FAQ
             </Link>
-            <span>•</span>
-            <span className="text-[var(--color-accent)] font-semibold">Offline-First Tech</span>
           </div>
         </div>
       </div>
